@@ -2,17 +2,23 @@ import React from "react";
 import logo from "../assets/logo_salary.png";
 
 function JobCard(props){
+    let img, name;
+
+    if(props.job.organizations.length>0){
+      img = props.job.organizations[0].picture
+      name = props.job.organizations[0].name
+    }else{
+      img = logo
+      name = "Unknow"
+    }
+
     return (
-        <div className="col-12 col-md-4 mb-3" key={props.job.id}>
+        <div className="col-12 col-md-4 mb-3">
           <div className="card h-100 bg-dark">
             <img
-              src={
-                props.job.organizations[0].picture === null
-                  ? logo
-                  : props.job.organizations[0].picture
-              }
+              src={img}
               className="card-img-top"
-              alt={props.job.organizations[0].name}
+              alt={name}
             />
             <div className="card-body">
               <h5
@@ -23,7 +29,7 @@ function JobCard(props){
               </h5>
               <p className="card-text mb-0">{props.job.type}</p>
               <p className="card-text mb-0">
-                {props.job.organizations[0].name}
+                {name}
               </p>
               <p className="card-text mb-0">{props.job.locations[0]}</p>
               <p className="card-text mb-0">
@@ -36,7 +42,7 @@ function JobCard(props){
             </div>
             <div className="card-footer">
               <a
-                href={"https://torre.co/props.jobs/" + props.job.id}
+                href={"https://torre.co/jobs/" + props.job.id}
                 className="btn btn-torre w-100"
               >
                 VIEW

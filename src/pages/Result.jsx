@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 /* Assets */
 import loading from "../assets/loading.gif";
 import check_icon from "../assets/icon/check_icon.png";
+import user_icon from "../assets/icon/user_icon.png";
 
 /* Utils */
 import NetWorkHelper from "../utils/NetworkHelper.js";
@@ -17,7 +18,6 @@ class Result extends React.Component {
   componentDidMount() {
     if (this.props.location.data) {
       let { data } = this.props.location;
-      console.log(data);
       this.setState({ data: data });
       this.getSpectedSalary(data);
     }else{
@@ -73,7 +73,7 @@ class Result extends React.Component {
         <div className="row">
           <div className="offset-4 col-4 offset-md-5 col-md-2 img-torre mb-3">
             <img
-              src={this.state.data.user.person.picture}
+              src={!this.state.data.user.person.picture ? user_icon :this.state.data.user.person.picture}
               alt={this.state.data.user.person.name}
             />
           </div>
@@ -103,7 +103,7 @@ class Result extends React.Component {
             <h2>Jobs Opportunities</h2>
           </div>
           {this.state.data.jobs.map((job) => (
-            <JobCard job={job} />
+            <JobCard job={job}  key={job.id}/>
           ))}
         </div>
         <div className="row mb-5 mt-3">
